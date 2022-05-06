@@ -1,0 +1,4 @@
+2022-05-06 17:53:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "EMPLOYEES" ya existe
+Table "EMPLOYEES" already exists; SQL statement:
+Create table Employees (id int primary key auto_increment, name varchar(30), email varchar(30)) [42101-200]
