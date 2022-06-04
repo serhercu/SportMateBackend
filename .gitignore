@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/SportMateDB.mv.db
+/SportMateDB.trace.db
