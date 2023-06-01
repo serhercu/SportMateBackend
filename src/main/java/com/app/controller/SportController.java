@@ -15,14 +15,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.app.dto.SportDTO;
 import com.app.repository.SportRepository;
-import com.app.service.sport.SportService;
+import com.app.service.sport.ISportService;
 
 @CrossOrigin(origins="http://localhost:8080")
 @RestController
 public class SportController {
 	
 	@Autowired
-	SportService sportService;
+	ISportService sportService;
 	
 	@Autowired
 	SportRepository sportRepo;
@@ -33,7 +33,5 @@ public class SportController {
 			HttpServletResponse response) {
 
 		return new ResponseEntity<>(sportService.getAllSports(), HttpStatus.OK);
-
 	}
-
 }

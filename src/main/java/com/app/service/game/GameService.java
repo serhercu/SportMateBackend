@@ -15,7 +15,6 @@ public class GameService implements IGameService {
 
 	@Override
 	public GameDTO createGame(GameDTO game) {
-		
 		Game newGame = new Game();
 		newGame.setDescription(game.getDescription());
 		newGame.setPlayersRequired(game.getPlayersRequired());
@@ -24,14 +23,11 @@ public class GameService implements IGameService {
 		newGame.setDate(game.getDate());
 		newGame.setPrivacy(game.getPrivacy());
 		newGame.setChatId(1);
-//		newGame.setCenter(game.getCenter());
 		newGame.setSport(game.getSport());
 		newGame.setProvince(game.getProvince());
 		
 		gameRepo.save(newGame);
-		GameDTO result = Game.createDTO(newGame);
-		
-		return result;
+		return Game.createDTO(newGame);
 	}
 	
 }

@@ -30,6 +30,5 @@ public class LevelController {
 			HttpServletResponse response) {
 
 		return new ResponseEntity<>(levelService.getAllLevels(), HttpStatus.OK);
-
 	}
 }
