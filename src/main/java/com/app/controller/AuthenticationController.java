@@ -3,7 +3,6 @@ package com.app.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,10 +42,10 @@ public class AuthenticationController {
 		return new ResponseEntity<>(authService.checkUsernameEmail(username, email), HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/checkPassword")
-	public ResponseEntity<Boolean> checkPassword(@RequestBody String checkPasswordRequest, HttpServletRequest request,
+	@GetMapping(value = "/login")
+	public ResponseEntity<Player> login(@RequestParam String username, @RequestParam String password, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		return new ResponseEntity<>(authService.checkUserPassword(new JSONObject(checkPasswordRequest)), HttpStatus.OK);
+		return new ResponseEntity<>(authService.login(username, password), HttpStatus.OK);
 	}
 }

@@ -2,7 +2,6 @@ package com.app.service.auth;
 
 import java.util.Optional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,8 @@ import com.app.model.auth.register.SportRequest;
 import com.app.repository.player.AuthenticationRepository;
 import com.app.repository.player.PlayerRepository;
 import com.app.repository.player.PlayerSportRepository;
-import com.app.util.Constants;
 import com.app.util.ErrorCodes;
+import com.app.util.InternalException;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -67,30 +66,30 @@ public class AuthenticationServiceImpl implements IAuthentication {
 		}
 		return 200;
 	}
-
+	
 	@Override
-	public Boolean checkUserPassword(JSONObject passwordRequest) {
-		String password = passwordRequest.optString(Constants.PASSWORD);
-		String username = passwordRequest.optString(Constants.USERNAME);
-		
+	public Player login(String username, String password) {
 		Optional<Player> player = playerRepo.findByUsername(username);
 		if (!player.isPresent()) {
-		    return false;
+		    throw new InternalException(2000, "El usuario no existe");
+		}
+		
+		if (!checkLogin(player.get().getId(), password)) {
+			throw new InternalException(2001, "Contraseña incorrecta");
 		}
 
-		Optional<Authentication> optAuth = authRepo.findByUserId(player.get().getId());
+		return player.get();
+	}
+	
+	private boolean checkLogin(Integer userId, String password) {
+		Optional<Authentication> optAuth = authRepo.findByUserId(userId);
 		if (!optAuth.isPresent()) {
 		    return false;
 		}
-
 		try {
-		    if (!argon2.verify(optAuth.get().getHash(), password)) {
-		        return false;
-		    }
+			return argon2.verify(optAuth.get().getHash(), password);
 		} finally {
 		    argon2.wipeArray(password.toCharArray());
 		}
-
-		return true;
 	}
 }
