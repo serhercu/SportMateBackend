@@ -3,6 +3,7 @@ package com.app.dto;
 import java.util.Date;
 
 import com.app.model.Center;
+import com.app.model.City;
 import com.app.model.Sport;
 
 public class GameDTO {
@@ -18,6 +19,7 @@ public class GameDTO {
 	private Center center;
 	private Sport sport;
 	private Integer province;
+	private City city;
 	
 	public Integer getId() {
 		return id;
@@ -84,5 +86,11 @@ public class GameDTO {
 	}
 	public void setProvince(Integer province) {
 		this.province = province;
+	}
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
 	}
 }

@@ -1,12 +1,16 @@
 package com.app.model;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -41,6 +45,14 @@ public class Player {
 	@NonNull
 	@Column(name = "PLY_BIRTHDAY")
 	private Date birthday;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "PLAYER_SPORT",
+        joinColumns = @JoinColumn(name = "PLS_PLY_ID"),
+        inverseJoinColumns = @JoinColumn(name = "PLS_SPO_ID")
+    )
+    private Set<Sport> sports;
 
 	public Integer getId() {
 		return id;
@@ -88,5 +100,13 @@ public class Player {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public Set<Sport> getSports() {
+		return sports;
+	}
+
+	public void setSports(Set<Sport> sports) {
+		this.sports = sports;
 	}
 }

@@ -56,6 +56,10 @@ public class Game {
 	@ManyToOne
 	@JoinColumn(name = "GAM_SPO_ID", referencedColumnName = "SPO_ID")
 	private Sport sport;
+	
+	@ManyToOne
+	@JoinColumn(name = "GAM_CTY_ID", referencedColumnName = "CTY_ID")
+	private City city;
 
 	public Integer getId() {
 		return id;
@@ -145,6 +149,14 @@ public class Game {
 		this.province = province;
 	}
 
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
 	public static GameDTO createDTO(Game game) {
 		GameDTO gameDTO = new GameDTO();
 		
@@ -159,6 +171,7 @@ public class Game {
 		gameDTO.setPrivacy(game.getPrivacy());
 		gameDTO.setSport(game.getSport());
 		gameDTO.setProvince(game.getProvince());
+		gameDTO.setCity(game.getCity());
 		
 		return gameDTO;
 	}
