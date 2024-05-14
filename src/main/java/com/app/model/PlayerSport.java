@@ -22,7 +22,7 @@ public class PlayerSport {
 	
 	@NonNull
 	@Column(name = "PLS_PLY_ID")
-	private Integer playerId;
+	private Long playerId;
 	
 	@NonNull
 	@Column(name = "PLS_SPO_ID")
@@ -35,7 +35,7 @@ public class PlayerSport {
 		
 	}
 	
-	public PlayerSport(Integer playerId, Integer sportId, Integer level) {
+	public PlayerSport(Long playerId, Integer sportId, Integer level) {
 		this.playerId = playerId;
 		this.sportId = sportId;
 		this.level = level;
@@ -49,11 +49,11 @@ public class PlayerSport {
 		this.id = id;
 	}
 
-	public Integer getPlayerId() {
+	public Long getPlayerId() {
 		return playerId;
 	}
 
-	public void setPlayerId(Integer playerId) {
+	public void setPlayerId(Long playerId) {
 		this.playerId = playerId;
 	}
 

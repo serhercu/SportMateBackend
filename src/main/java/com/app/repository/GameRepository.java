@@ -20,7 +20,7 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 			   "AND (:cityId IS NULL OR g.city.id = :cityId) " +
 	           "AND (:startDate IS NULL OR g.date >= :startDate) " +
 	           "AND (:endDate IS NULL OR g.date <= :endDate) " +
-			   "ORDER BY g.date")
+			   "ORDER BY g.date desc")
 	List<Game> findGamesBySportIdAndLevelAndCityAndDateRange(@Param("sportId") Integer sportId, @Param("levelId") Integer levelId,
 			@Param("cityId") Integer cityId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 

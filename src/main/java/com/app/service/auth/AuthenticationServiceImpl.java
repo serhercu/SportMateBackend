@@ -71,17 +71,17 @@ public class AuthenticationServiceImpl implements IAuthentication {
 	public Player login(String username, String password) {
 		Optional<Player> player = playerRepo.findByUsername(username);
 		if (!player.isPresent()) {
-		    throw new InternalException(2000, "El usuario no existe");
+		    throw new InternalException(ErrorCodes.USER_NOT_EXISTS, "El usuario no existe");
 		}
 		
 		if (!checkLogin(player.get().getId(), password)) {
-			throw new InternalException(2001, "Contraseña incorrecta");
+			throw new InternalException(ErrorCodes.WRONG_PASSWORD, "Contraseña incorrecta");
 		}
 
 		return player.get();
 	}
 	
-	private boolean checkLogin(Integer userId, String password) {
+	private boolean checkLogin(Long userId, String password) {
 		Optional<Authentication> optAuth = authRepo.findByUserId(userId);
 		if (!optAuth.isPresent()) {
 		    return false;

@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.app.dto.GameDTO;
-import com.app.service.game.GameService;
+import com.app.dto.GamePlayerDTO;
+import com.app.service.game.IGameService;
 
 @CrossOrigin(origins="http://localhost:8080")
 @RequestMapping("/game")
@@ -26,7 +27,14 @@ import com.app.service.game.GameService;
 public class GameController {
 	
 	@Autowired
-	GameService gameService;
+	IGameService gameService;
+	
+	@GetMapping
+	public ResponseEntity<GameDTO> getGame(@RequestParam(required = false) Integer idGame,
+			UriComponentsBuilder builder, HttpServletRequest request, HttpServletResponse response) {
+
+		return new ResponseEntity<>(gameService.getGame(idGame), HttpStatus.OK);
+	}
 	
 	@PostMapping(value = "/createGame")
 	public ResponseEntity<GameDTO> createGame(@RequestBody GameDTO game, HttpServletRequest request,
@@ -43,6 +51,27 @@ public class GameController {
 			UriComponentsBuilder builder, HttpServletRequest request, HttpServletResponse response) {
 
 		return new ResponseEntity<>(gameService.getGames(sportId, levelValue, dateStart, dateEnd, locationId), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/joinGame")
+	public ResponseEntity<GameDTO> joinGame(@RequestBody GamePlayerDTO game, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		return new ResponseEntity<>(gameService.joinGame(game), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/leaveGame")
+	public ResponseEntity<GameDTO> leaveGame(@RequestBody GamePlayerDTO game, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		return new ResponseEntity<>(gameService.leaveGame(game), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/cancelGame")
+	public ResponseEntity<GameDTO> cancelGame(@RequestBody GamePlayerDTO game, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		return new ResponseEntity<>(gameService.cancelGame(game), HttpStatus.OK);
 	}
 
 }

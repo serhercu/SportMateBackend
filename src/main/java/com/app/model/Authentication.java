@@ -20,7 +20,7 @@ public class Authentication {
 	private Integer id;
 	
 	@Column(name = "ATH_USER_ID", unique = true)
-	private Integer userId;
+	private Long userId;
 	
 	@Column(name = "ATH_HASH", unique = true)
 	private String hash;
@@ -29,7 +29,7 @@ public class Authentication {
 		
 	}
 	
-	public Authentication(Integer userId, String hash) {
+	public Authentication(Long userId, String hash) {
 		this.setUserId(userId);
 		this.setHash(hash);
 	}
@@ -42,11 +42,11 @@ public class Authentication {
 		this.id = id;
 	}
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

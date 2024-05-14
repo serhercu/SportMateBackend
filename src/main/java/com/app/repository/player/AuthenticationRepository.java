@@ -10,7 +10,7 @@ import com.app.model.Authentication;
 
 @CrossOrigin(origins="http://localhost:8080")
 @Repository
-public interface AuthenticationRepository extends JpaRepository<Authentication, Integer> {
+public interface AuthenticationRepository extends JpaRepository<Authentication, Long> {
 	
-	Optional<Authentication> findByUserId(Integer userId);
+	Optional<Authentication> findByUserId(Long userId);
 }

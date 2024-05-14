@@ -24,7 +24,7 @@ public class Player {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PLY_ID")
-	private Integer id;
+	private Long id;
 	
 	@NonNull
 	@Column(name = "PLY_USERNAME", unique = true)
@@ -54,11 +54,11 @@ public class Player {
     )
     private Set<Sport> sports;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

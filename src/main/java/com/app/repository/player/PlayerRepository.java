@@ -10,7 +10,7 @@ import com.app.model.Player;
 
 @CrossOrigin(origins="http://localhost:8080")
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Integer> {
+public interface PlayerRepository extends JpaRepository<Player, Long> {
 	
 	boolean existsByEmail(String email);
 	
