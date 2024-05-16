@@ -12,6 +12,8 @@ public interface IGameService {
 	GameDTO createGame(GameDTO game);
 	
 	List<GameDTO> getGames(Integer sportId, Integer levelId, Long dateStart, Long dateEnd, Integer locationId);
+	
+	List<GameDTO> getFinishedGames(Long playerId);
 
 	GameDTO joinGame(GamePlayerDTO gamePlayer);
 	

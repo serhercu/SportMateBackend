@@ -119,5 +119,22 @@ public class GameService implements IGameService {
 			throw new InternalException(ErrorCodes.CANCEL_PLAYER_ERROR, "El usuario o el partido no existe"); 
 		}
 	}
+
+	@Override
+	public List<GameDTO> getFinishedGames(Long playerId) {
+
+		List<GameDTO> resultList = new ArrayList<>();
+		Optional<Player> optPlayer = playerRepo.findById(playerId);
+		
+		if (optPlayer.isPresent()) {
+			List<Game> gameList = gameRepo.findFinishedGamesByPlayer(playerId);
+			for (Game game : gameList) {
+				resultList.add(Game.createDTO(game));
+			}
+			return resultList;
+		} else {
+			throw new InternalException(ErrorCodes.FINISHED_GAMES_ERROR, "El usuario o el partido no existe"); 
+		}
+	}
 	
 }

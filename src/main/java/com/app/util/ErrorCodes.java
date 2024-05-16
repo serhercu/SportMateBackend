@@ -14,6 +14,7 @@ public class ErrorCodes {
 	public static final int JOIN_PLAYER_ERROR = 3000;
 	public static final int LEAVE_PLAYER_ERROR = 3001;
 	public static final int CANCEL_PLAYER_ERROR = 3002;
+	public static final int FINISHED_GAMES_ERROR = 3003;
 	
 	private ErrorCodes() {
 		

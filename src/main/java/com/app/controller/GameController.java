@@ -36,6 +36,13 @@ public class GameController {
 		return new ResponseEntity<>(gameService.getGame(idGame), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/finishedGames")
+	public ResponseEntity<List<GameDTO>> finishedGamesByPlayer(@RequestParam(required = false) Long playerId,
+			UriComponentsBuilder builder, HttpServletRequest request, HttpServletResponse response) {
+
+		return new ResponseEntity<>(gameService.getFinishedGames(playerId), HttpStatus.OK);
+	}
+	
 	@PostMapping(value = "/createGame")
 	public ResponseEntity<GameDTO> createGame(@RequestBody GameDTO game, HttpServletRequest request,
 			HttpServletResponse response) {
