@@ -11,6 +11,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PlayerViewDTO {
 	
+	private Long playerId;
 	private String username;
 	private String name;
 	private String surname;

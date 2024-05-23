@@ -22,7 +22,7 @@ public class PlayerViewImpl implements IPlayerViewService {
 		List<Player> results = playerRepo.findBySearch(search);
 		
 		for (Player result : results) {
-			list.add(new PlayerViewDTO(result.getUsername(), result.getName(),
+			list.add(new PlayerViewDTO(result.getId(), result.getUsername(), result.getName(),
 					result.getSurname(), result.getSports()));
 		}
 		return list;
