@@ -2,7 +2,7 @@ package com.app.model.auth.register;
 
 import java.util.List;
 
-import com.app.model.Player;
+import com.app.model.player.Player;
 
 public class RegisterRequest {
 	

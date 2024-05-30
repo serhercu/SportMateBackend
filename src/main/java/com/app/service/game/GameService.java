@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.app.dto.GameDTO;
 import com.app.dto.GamePlayerDTO;
 import com.app.model.Game;
-import com.app.model.Player;
+import com.app.model.player.Player;
 import com.app.repository.GameRepository;
 import com.app.repository.player.PlayerRepository;
 import com.app.util.ErrorCodes;

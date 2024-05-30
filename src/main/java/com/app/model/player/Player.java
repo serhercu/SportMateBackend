@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.player;
 
 import java.sql.Date;
 import java.util.Set;
@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.lang.NonNull;
+
+import com.app.model.Sport;
 
 @Entity
 @DynamicUpdate

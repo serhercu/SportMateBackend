@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.player;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

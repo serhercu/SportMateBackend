@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.player;
 
 import java.io.Serializable;
 
@@ -24,6 +24,8 @@ import lombok.NoArgsConstructor;
 public class PlayerFriend {
 	
 	public static final String PENDING = "P";
+	public static final String PENDING_OTHER_USER = "O";
+	public static final String ACCEPTED = "A";
 	
 	@Id
 	@Column(name = "PLF_PLY_SENDER")
@@ -37,6 +39,8 @@ public class PlayerFriend {
 	private String status;
 	
 	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class PlayerFriendId implements Serializable {
 		
 		/**

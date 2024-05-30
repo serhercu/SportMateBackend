@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.app.model.Player;
 import com.app.model.auth.register.RegisterRequest;
+import com.app.model.player.Player;
 import com.app.service.auth.IAuthentication;
 
 @CrossOrigin(origins="http://localhost:8080")

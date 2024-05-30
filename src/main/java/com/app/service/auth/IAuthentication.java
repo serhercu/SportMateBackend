@@ -1,7 +1,7 @@
 package com.app.service.auth;
 
-import com.app.model.Player;
 import com.app.model.auth.register.RegisterRequest;
+import com.app.model.player.Player;
 
 public interface IAuthentication {
 

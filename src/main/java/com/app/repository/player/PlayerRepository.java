@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.app.model.Player;
+import com.app.model.player.Player;
 
 @CrossOrigin(origins="http://localhost:8080")
 @Repository

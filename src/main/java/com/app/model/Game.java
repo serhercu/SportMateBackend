@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.app.dto.GameDTO;
+import com.app.model.player.Player;
 
 import lombok.Data;
 

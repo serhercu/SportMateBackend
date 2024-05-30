@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.model.Authentication;
-import com.app.model.Player;
-import com.app.model.PlayerSport;
 import com.app.model.auth.register.RegisterRequest;
 import com.app.model.auth.register.SportRequest;
+import com.app.model.player.Player;
+import com.app.model.player.PlayerSport;
 import com.app.repository.player.AuthenticationRepository;
 import com.app.repository.player.PlayerRepository;
 import com.app.repository.player.PlayerSportRepository;
