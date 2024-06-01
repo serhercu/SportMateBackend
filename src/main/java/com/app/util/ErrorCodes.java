@@ -15,6 +15,7 @@ public class ErrorCodes {
 	public static final int LEAVE_PLAYER_ERROR = 3001;
 	public static final int CANCEL_PLAYER_ERROR = 3002;
 	public static final int FINISHED_GAMES_ERROR = 3003;
+	public static final int PLAYER_GAMES_ERROR = 3004;
 	
 	// Friends
 	public static final int REPLY_FRIEND_REQUEST_ERROR = 4000;

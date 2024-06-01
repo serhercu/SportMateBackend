@@ -20,4 +20,6 @@ public interface IGameService {
 	GameDTO leaveGame(GamePlayerDTO gamePlayer);
 	
 	GameDTO cancelGame(GamePlayerDTO gamePlayer);
+	
+	List<GameDTO> getGamesByPlayer(Long playerId);
 }

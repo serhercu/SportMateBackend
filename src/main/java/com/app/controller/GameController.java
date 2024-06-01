@@ -80,5 +80,12 @@ public class GameController {
 		
 		return new ResponseEntity<>(gameService.cancelGame(game), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/playerGames")
+	public ResponseEntity<List<GameDTO>> getGamesByPlayer(@RequestParam(required = false) Long playerId,
+			UriComponentsBuilder builder, HttpServletRequest request, HttpServletResponse response) {
+
+		return new ResponseEntity<>(gameService.getGamesByPlayer(playerId), HttpStatus.OK);
+	}
 
 }

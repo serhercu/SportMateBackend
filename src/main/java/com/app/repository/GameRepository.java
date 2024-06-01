@@ -31,5 +31,11 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 			+ "AND g.date < current_date() " +
 			   "ORDER BY g.date desc")
 	List<Game> findFinishedGamesByPlayer(@Param("playerId") Long playerId);
+	
+	@Query("select g from Game g, GamePlayer gp "
+			+ "WHERE gp.playerId = :playerId "
+			+ "AND gp.gameId = g.id "
+			+ "AND g.status != 50")
+	List<Game> findGamesByPlayer(@Param("playerId") Long playerId);
 
 }
