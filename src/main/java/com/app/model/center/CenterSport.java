@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.center;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,19 +9,16 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import lombok.Data;
-
 @Entity
 @DynamicUpdate
-@Data
-@Table(name = "CITY")
-public class City {
+@Table(name = "CENTER_SPORT")
+public class CenterSport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(name = "CTY_ID")
-	private Integer id;
+	@Column(name = "CNT_ID")
+	private Integer center;
 	
-	@Column(name = "CTY_NAME")
-	private String name;
+	@Column(name = "SPO_ID")
+	private Integer sport;
 }

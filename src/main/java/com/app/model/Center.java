@@ -10,12 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import lombok.Data;
+
 @Entity
 @DynamicUpdate
+@Data
 @Table(name = "CENTER")
 public class Center {
 	
@@ -28,10 +32,10 @@ public class Center {
 	private String description;
 	
 	@Column(name = "CNT_NAME")
-	private Integer playersRequired;
+	private String name;
 	
 	@Column(name = "CNT_LOCATION")
-	private Integer level;
+	private String location;
 	
 	@ManyToMany
 	@JoinTable(
@@ -39,45 +43,8 @@ public class Center {
 	  joinColumns = @JoinColumn(name = "CNT_ID"), 
 	  inverseJoinColumns = @JoinColumn(name = "SPO_ID"))
 	Set<Sport> sports;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getPlayersRequired() {
-		return playersRequired;
-	}
-
-	public void setPlayersRequired(Integer playersRequired) {
-		this.playersRequired = playersRequired;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public Set<Sport> getSports() {
-		return sports;
-	}
-
-	public void setSports(Set<Sport> sports) {
-		this.sports = sports;
-	}
 	
+	@OneToOne
+    @JoinColumn(name = "CNT_CITY", referencedColumnName = "CTY_ID")
+    private City city;
 }
