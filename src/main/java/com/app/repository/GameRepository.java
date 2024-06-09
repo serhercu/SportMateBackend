@@ -16,12 +16,12 @@ import com.app.model.Game;
 public interface GameRepository extends JpaRepository<Game, Integer> {
 	
 	@Query("SELECT g FROM Game g WHERE (:sportId IS NULL OR g.sport.id = :sportId) " +
-			   "AND (:levelId IS NULL OR g.level = :levelId) " +
-			   "AND (:cityId IS NULL OR g.city.id = :cityId) " +
-	           "AND (:startDate IS NULL OR g.date >= :startDate) " +
-	           "AND (:endDate IS NULL OR g.date <= :endDate) " +
-	           "AND (g.status = 10) " +
-			   "ORDER BY g.date desc")
+		       "AND (:levelId IS NULL OR g.level = :levelId) " +
+		       "AND (:cityId IS NULL OR g.city.id = :cityId) " +
+		       "AND (COALESCE(:startDate, CURRENT_DATE) IS NULL OR g.date >= COALESCE(:startDate, CURRENT_DATE)) " +
+		       "AND (:endDate IS NULL OR g.date <= :endDate) " +
+		       "AND (g.status = 10) " +
+		       "ORDER BY g.date DESC")
 	List<Game> findGamesBySportIdAndLevelAndCityAndDateRange(@Param("sportId") Integer sportId, @Param("levelId") Integer levelId,
 			@Param("cityId") Integer cityId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 	

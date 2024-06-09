@@ -1,21 +1,14 @@
 package com.app.model.auth.register;
 
+import com.app.model.Level;
+import com.app.model.Sport;
+
+import lombok.Data;
+
+@Data
 public class SportRequest {
 	
-	private Integer idSport;
-	private Integer level;
-	
-	public Integer getIdSport() {
-		return idSport;
-	}
-	public void setIdSport(Integer idSport) {
-		this.idSport = idSport;
-	}
-	public Integer getLevel() {
-		return level;
-	}
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
+	private Sport sport;
+	private Level level;
 
 }

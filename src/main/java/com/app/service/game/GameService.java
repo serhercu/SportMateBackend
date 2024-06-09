@@ -44,6 +44,7 @@ public class GameService implements IGameService {
 		newGame.setPlayerCreatorId(game.getPlayerCreatorId());
 		newGame.setPlayers(new HashSet<>());
 		newGame.setStatus(Game.STATUS_OPEN);
+		newGame.setCenter(game.getCenter());
 		
 		Optional<Player> playerCreator = playerRepo.findById(newGame.getPlayerCreatorId());
 		if (playerCreator.isPresent()) {

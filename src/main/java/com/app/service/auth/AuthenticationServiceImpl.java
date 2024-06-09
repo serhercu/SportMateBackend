@@ -48,8 +48,8 @@ public class AuthenticationServiceImpl implements IAuthentication {
 		}
 		
 		for (SportRequest sportRequest : registerRequest.getSportList()) {
-	        PlayerSport playerSport = new PlayerSport(requestPlayer.getId(), sportRequest.getIdSport(),
-	        		sportRequest.getLevel());
+	        PlayerSport playerSport = new PlayerSport(requestPlayer.getId(), sportRequest.getSport().getId(),
+	        		sportRequest.getLevel().getId());
 	        playerSportRepo.save(playerSport);
 	    }
 		

@@ -14,10 +14,11 @@ public interface CenterRepository extends JpaRepository<Center, Integer> {
 	
 	@Query("SELECT c FROM Center c " +
 		       "WHERE (:city IS NULL OR c.city.id = :city) " +
-		       " AND (:name LIKE '' OR UPPER(c.name) LIKE UPPER(CONCAT('%', :name, '%'))) " +
-		       " AND ((:sportList) IS NULL OR c.id IN " +
+		       " AND (:name is null OR UPPER(c.name) LIKE UPPER(CONCAT('%', :name, '%'))) " +
+		       " AND (:nullSportList = 1 OR c.id IN " +
 		       " (SELECT cs.center.id FROM CenterSport cs WHERE cs.sport IN (:sportList)))")
 		List<Center> findGamesParameters(@Param("name") String name,
-				@Param("city") Integer city, @Param("sportList") List<Integer> sportList);
+				@Param("city") Integer city, @Param("sportList") List<Integer> sportList,
+				@Param("nullSportList") Integer nullSportList);
 
 }

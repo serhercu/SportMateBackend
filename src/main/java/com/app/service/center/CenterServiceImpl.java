@@ -43,7 +43,8 @@ public class CenterServiceImpl implements ICenterService {
 	
 	@Override
 	public List<CenterDTO> getCenters(String centerName, Integer cityId, List<Integer> listSports) {
-		List<Center> centers = centerRepo.findGamesParameters(centerName != null ? centerName : "", cityId, listSports);		
+		List<Center> centers = centerRepo.findGamesParameters(centerName, cityId, listSports, 
+				listSports == null || listSports.isEmpty() ? 1 : 0);		
 		return centers.stream()
                 .map(this::mapCenterDTO)
                 .collect(Collectors.toList());
@@ -72,13 +73,5 @@ public class CenterServiceImpl implements ICenterService {
 			return returnCenter(centerId);
 		}
 		return null;
-		
-		//		try {
-//            centerPlayerRepo.delete(new CenterPlayer(playerId, centerId));
-//            centerPlayerRepo.flush();
-//    		return returnCenter(centerId);
-//        } catch (DataIntegrityViolationException e) {
-//        	throw new InternalException(ErrorCodes.CENTER_PLAYER_NOT_FOLLOWING, "El usuario no sigue al centro");
-//        }
 	}
 }
