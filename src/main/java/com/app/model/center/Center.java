@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.center;
 
 import java.util.Set;
 
@@ -10,10 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.app.model.City;
+import com.app.model.Sport;
 
 import lombok.Data;
 
@@ -42,9 +45,10 @@ public class Center {
 	  name = "CENTER_SPORT", 
 	  joinColumns = @JoinColumn(name = "CNT_ID"), 
 	  inverseJoinColumns = @JoinColumn(name = "SPO_ID"))
-	Set<Sport> sports;
+	private Set<Sport> sports;
 	
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "CNT_CITY", referencedColumnName = "CTY_ID")
     private City city;
+	
 }

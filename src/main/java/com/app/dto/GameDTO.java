@@ -4,10 +4,10 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
-import com.app.model.Center;
 import com.app.model.City;
 import com.app.model.Level;
 import com.app.model.Sport;
+import com.app.model.center.Center;
 import com.app.model.player.Player;
 
 import lombok.Data;

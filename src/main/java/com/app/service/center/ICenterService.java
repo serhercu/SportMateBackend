@@ -2,9 +2,9 @@ package com.app.service.center;
 
 import java.util.List;
 
-import com.app.model.Center;
+import com.app.dto.center.CenterDTO;
 
 public interface ICenterService {
 	
-	List<Center> getCenters(String centerName, Integer cityId, List<Integer> listSports);
+	List<CenterDTO> getCenters(String centerName, Integer cityId, List<Integer> listSports);
 }

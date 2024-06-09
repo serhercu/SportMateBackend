@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.app.model.Center;
+import com.app.dto.center.CenterDTO;
 import com.app.service.center.ICenterService;
 
 @CrossOrigin(origins="http://localhost:8080")
@@ -27,7 +27,7 @@ public class CenterController {
 	private ICenterService centerService;
 	
 	@GetMapping(value = "/centers")
-	public ResponseEntity<List<Center>> getAllLevels(@RequestParam(required = false) String centerName, 
+	public ResponseEntity<List<CenterDTO>> getAllLevels(@RequestParam(required = false) String centerName, 
 	        @RequestParam(required = false) Integer cityId, @RequestParam(required = false) List<Integer> listSports,
 	        UriComponentsBuilder builder, HttpServletRequest request, HttpServletResponse response) {
 
