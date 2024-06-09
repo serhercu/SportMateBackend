@@ -20,6 +20,9 @@ public class ErrorCodes {
 	// Friends
 	public static final int REPLY_FRIEND_REQUEST_ERROR = 4000;
 	
+	// Center
+	public static final int CENTER_NOT_FOUND = 5000;
+	
 	private ErrorCodes() {
 		
 	}

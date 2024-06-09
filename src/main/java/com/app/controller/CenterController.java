@@ -33,5 +33,12 @@ public class CenterController {
 
 	    return new ResponseEntity<>(centerService.getCenters(centerName, cityId, listSports), HttpStatus.OK);
 	}
+	
+	@GetMapping
+	public ResponseEntity<CenterDTO> getCenter(@RequestParam(required = false) Integer centerId,
+			UriComponentsBuilder builder, HttpServletRequest request, HttpServletResponse response) {
+
+		return new ResponseEntity<>(centerService.getCenter(centerId), HttpStatus.OK);
+	}
 
 }

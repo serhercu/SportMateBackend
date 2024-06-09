@@ -1,5 +1,6 @@
 package com.app.dto.center;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.app.model.center.CenterImage;
@@ -11,7 +12,7 @@ public class CenterImageDTO {
 	
 	private String profile;
 	
-	private List<String> banner;
+	private List<String> banner = new ArrayList<>();
 	
 	public CenterImageDTO(List<CenterImage> images) {
 		for (CenterImage centerImg : images) {
