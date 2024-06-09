@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.app.dto.center.CenterDTO;
 import com.app.model.center.Center;
+import com.app.model.center.CenterPlayer;
 import com.app.repository.center.CenterImageRepository;
+import com.app.repository.center.CenterPlayerRepository;
 import com.app.repository.center.CenterRepository;
 import com.app.util.ErrorCodes;
 import com.app.util.InternalException;
@@ -23,11 +25,27 @@ public class CenterServiceImpl implements ICenterService {
 	@Autowired
 	private CenterImageRepository centerImageRepo;
 	
+	@Autowired
+	private CenterPlayerRepository centerPlayerRepo;
+		
+	private CenterDTO mapCenterDTO(Center center) {
+		return new CenterDTO(center, centerImageRepo.findByCenter(center));
+	}
+	
+	private CenterDTO returnCenter(Integer centerId) {
+		Optional<Center> centerResult = centerRepo.findById(centerId);
+		if (centerResult.isPresent()) {
+			return mapCenterDTO(centerResult.get());			
+		} else {
+			throw new InternalException(ErrorCodes.CENTER_NOT_FOUND, "No existe ningún centro para ese id"); 
+		}
+	}
+	
 	@Override
 	public List<CenterDTO> getCenters(String centerName, Integer cityId, List<Integer> listSports) {
 		List<Center> centers = centerRepo.findGamesParameters(centerName != null ? centerName : "", cityId, listSports);		
 		return centers.stream()
-                .map(center -> mapCenterDTO(center))
+                .map(this::mapCenterDTO)
                 .collect(Collectors.toList());
 	}
 
@@ -37,12 +55,30 @@ public class CenterServiceImpl implements ICenterService {
 		if (centerOpt.isPresent()) {
 			return mapCenterDTO(centerOpt.get());
 		} else {
-			throw new InternalException(ErrorCodes.CENTER_NOT_FOUND, "No existe ningún centro para ese id"); 
-
+			throw new InternalException(ErrorCodes.CENTER_NOT_FOUND, "No existe ningún centro para ese id");
 		}
 	}
 	
-	private CenterDTO mapCenterDTO(Center center) {
-		return new CenterDTO(center, centerImageRepo.findByCenter(center));
+	@Override
+	public CenterDTO followCenter(Integer playerId, Integer centerId) {
+		centerPlayerRepo.save(new CenterPlayer(playerId, centerId));
+		return returnCenter(centerId);
+	}
+	@Override
+	public CenterDTO unfollowCenter(Integer playerId, Integer centerId) {
+		Optional<CenterPlayer> centerPlayerOpt = centerPlayerRepo.findByPlayerAndCenter(playerId, centerId);
+		if (centerPlayerOpt.isPresent()) {
+			centerPlayerRepo.delete(centerPlayerOpt.get());
+			return returnCenter(centerId);
+		}
+		return null;
+		
+		//		try {
+//            centerPlayerRepo.delete(new CenterPlayer(playerId, centerId));
+//            centerPlayerRepo.flush();
+//    		return returnCenter(centerId);
+//        } catch (DataIntegrityViolationException e) {
+//        	throw new InternalException(ErrorCodes.CENTER_PLAYER_NOT_FOLLOWING, "El usuario no sigue al centro");
+//        }
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 import com.app.model.Sport;
 import com.app.model.center.Center;
 import com.app.model.center.CenterImage;
+import com.app.model.player.Player;
 
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class CenterDTO {
 	private String location;
 	private Set<Sport> sports;
 	private CenterImageDTO images;
+	private Set<Player> players;
 	
 	public CenterDTO(Center center, List<CenterImage> images) {
 		this.id = center.getId();
@@ -26,5 +28,6 @@ public class CenterDTO {
 		this.location = center.getLocation();
 		this.sports = center.getSports();
 		this.images = new CenterImageDTO(images);
+		this.players = center.getPlayers();
 	}
 }

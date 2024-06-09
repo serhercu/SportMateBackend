@@ -22,6 +22,7 @@ public class ErrorCodes {
 	
 	// Center
 	public static final int CENTER_NOT_FOUND = 5000;
+	public static final int CENTER_PLAYER_NOT_FOLLOWING = 5001;
 	
 	private ErrorCodes() {
 		

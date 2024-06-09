@@ -17,6 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.app.model.City;
 import com.app.model.Sport;
+import com.app.model.player.Player;
 
 import lombok.Data;
 
@@ -50,5 +51,13 @@ public class Center {
 	@ManyToOne
     @JoinColumn(name = "CNT_CITY", referencedColumnName = "CTY_ID")
     private City city;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "CENTER_PLAYER",
+        joinColumns = @JoinColumn(name = "CNP_CNT"),
+        inverseJoinColumns = @JoinColumn(name = "CNP_PLY")
+    )
+    private Set<Player> players;
 	
 }
