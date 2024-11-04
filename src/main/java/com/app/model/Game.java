@@ -1,6 +1,8 @@
 package com.app.model;
 
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,17 +10,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.app.dto.GameDTO;
+import com.app.model.center.Center;
+import com.app.model.player.Player;
+
+import lombok.Data;
 
 @Entity
 @DynamicUpdate
+@Data
 @Table(name = "GAME")
 public class Game {
+	
+	public static final Integer STATUS_OPEN = 10;
+	public static final Integer STATUS_CANCELED = 50;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -31,8 +43,9 @@ public class Game {
 	@Column(name = "GAM_PLAYERS_REQUIRED")
 	private Integer playersRequired;
 	
-	@Column(name = "GAM_LEVEL")
-	private Integer level;
+	@ManyToOne
+	@JoinColumn(name = "GAM_LEVEL", referencedColumnName = "LEV_ID")
+	private Level level;
 	
 	@Column(name = "GAM_PROVINCE")
 	private Integer province;
@@ -56,94 +69,27 @@ public class Game {
 	@ManyToOne
 	@JoinColumn(name = "GAM_SPO_ID", referencedColumnName = "SPO_ID")
 	private Sport sport;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getPlayersRequired() {
-		return playersRequired;
-	}
-
-	public void setPlayersRequired(Integer playersRequired) {
-		this.playersRequired = playersRequired;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Integer getPrivacy() {
-		return privacy;
-	}
-
-	public void setPrivacy(Integer privacy) {
-		this.privacy = privacy;
-	}
-
-	public Integer getChatId() {
-		return chatId;
-	}
-
-	public void setChatId(Integer chatId) {
-		this.chatId = chatId;
-	}
-
-	public Center getCenter() {
-		return center;
-	}
-
-	public void setCenter(Center center) {
-		this.center = center;
-	}
-
-	public Sport getSport() {
-		return sport;
-	}
-
-	public void setSport(Sport sport) {
-		this.sport = sport;
-	}
 	
-	public Integer getProvince() {
-		return province;
-	}
-
-	public void setProvince(Integer province) {
-		this.province = province;
-	}
+	@ManyToOne
+	@JoinColumn(name = "GAM_CTY_ID", referencedColumnName = "CTY_ID")
+	private City city;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "GAME_PLAYER",
+        joinColumns = @JoinColumn(name = "GAP_GAM_ID"),
+        inverseJoinColumns = @JoinColumn(name = "GAP_PLY_ID")
+    )
+    private Set<Player> players;
+	
+	@Column(name = "GAM_TIME")
+	private LocalTime time;
+	
+	@Column(name = "GAM_STATUS")
+	private Integer status;
+	
+	@Column(name = "GAM_PLY_CREATOR")
+	private Long playerCreatorId;
 
 	public static GameDTO createDTO(Game game) {
 		GameDTO gameDTO = new GameDTO();
@@ -159,6 +105,11 @@ public class Game {
 		gameDTO.setPrivacy(game.getPrivacy());
 		gameDTO.setSport(game.getSport());
 		gameDTO.setProvince(game.getProvince());
+		gameDTO.setCity(game.getCity());
+		gameDTO.setPlayers(game.getPlayers());
+		gameDTO.setTime(game.getTime());
+		gameDTO.setPlayerCreatorId(game.getPlayerCreatorId());
+		gameDTO.setStatus(game.getStatus());
 		
 		return gameDTO;
 	}

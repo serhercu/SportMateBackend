@@ -30,6 +30,5 @@ public class ProvinceController {
 			HttpServletResponse response) {
 
 		return new ResponseEntity<>(provService.getAll(), HttpStatus.OK);
-
 	}
 }

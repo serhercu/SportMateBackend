@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.center;
 
 import java.util.Set;
 
@@ -10,12 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.app.model.City;
+import com.app.model.Sport;
+import com.app.model.player.Player;
+
+import lombok.Data;
+
 @Entity
 @DynamicUpdate
+@Data
 @Table(name = "CENTER")
 public class Center {
 	
@@ -28,56 +36,28 @@ public class Center {
 	private String description;
 	
 	@Column(name = "CNT_NAME")
-	private Integer playersRequired;
+	private String name;
 	
 	@Column(name = "CNT_LOCATION")
-	private Integer level;
+	private String location;
 	
 	@ManyToMany
 	@JoinTable(
 	  name = "CENTER_SPORT", 
 	  joinColumns = @JoinColumn(name = "CNT_ID"), 
 	  inverseJoinColumns = @JoinColumn(name = "SPO_ID"))
-	Set<Sport> sports;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getPlayersRequired() {
-		return playersRequired;
-	}
-
-	public void setPlayersRequired(Integer playersRequired) {
-		this.playersRequired = playersRequired;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public Set<Sport> getSports() {
-		return sports;
-	}
-
-	public void setSports(Set<Sport> sports) {
-		this.sports = sports;
-	}
+	private Set<Sport> sports;
+	
+	@ManyToOne
+    @JoinColumn(name = "CNT_CITY", referencedColumnName = "CTY_ID")
+    private City city;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "CENTER_PLAYER",
+        joinColumns = @JoinColumn(name = "CNP_CNT"),
+        inverseJoinColumns = @JoinColumn(name = "CNP_PLY")
+    )
+    private Set<Player> players;
 	
 }
